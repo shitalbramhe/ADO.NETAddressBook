@@ -107,5 +107,19 @@ namespace ADO.NETAddressBook
                 throw new Exception(e.Message);
             }
         }
+        //To Get AddressBook Table data 
+        public DataSet GetAllContact()
+        {
+            Connection();
+            DataSet dataSet = new DataSet(); ;
+            con.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter("GetAddressBookTable", con);
+            adapter.Fill(dataSet, "AddressBookTable");
+            foreach (DataRow dataRow in dataSet.Tables["AddressBookTable"].Rows)
+            {
+                Console.WriteLine("\t" + dataRow["id"] + "  " + dataRow["firstname"] + " " + dataRow["lastname"] + " " + dataRow["address"] + " " + dataRow["city"] + " " + dataRow["state"] + " " + dataRow["zip"] + " " + dataRow["phonenumber"] + " " + dataRow["email"] + " " + dataRow["name"] + " " + dataRow["type"] + " " + dataRow["Contact_id"]);
+            }
+            return dataSet;
+        }
     }
 }
